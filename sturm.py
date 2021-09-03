@@ -6,11 +6,14 @@ Created on Wed Sep  1 11:56:17 2021
 """
 import numpy
 
-def raicesenintervalo (funcion,derivada,inicio,final):
-    n_funcion=len(funcion)
-    n=len(derivada)
+def raicesenintervalo (funcion,inicio,final):
     lista=[]
     lista.append(funcion)
+    derivada=[]
+    for i in range(len(funcion)-1):
+        aux_3=-(i-len(funcion)+1)*funcion[i]
+        derivada.append(aux_3)
+    n=len(derivada)
     lista.append(derivada)
     lista_1=[]
     lista_2=[]
@@ -61,4 +64,4 @@ def raicesenintervalo (funcion,derivada,inicio,final):
                 cambio_2+=1
     
     print("Se encontraron ",cambio_1-cambio_2, " raíces en el intervalo ","[",inicio,",", final,"]")
-raicesenintervalo([1,0,0,-4,0,1,-2],[6,0,0,-12,0,1],-2,2)
+raicesenintervalo([1,0,0,-4,0,1,-2],-2,2)

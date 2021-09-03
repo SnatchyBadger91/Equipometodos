@@ -1,10 +1,17 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Sep  1 11:56:17 2021
-
-@author: thor2
-"""
-import numpy
+def POLI_DIV(d, po):
+    f = list(d)
+    n = po[0]
+    for i in range(len(d)-(len(po)-1)):
+        f[i] = f[i]/n 
+        co = f[i]
+        if co != 0: 
+            for j in range(1, len(po)):
+                f[i + j] += -po[j] * co
+    b = -(len(po)-1)
+    x=f[b:]
+    while x[0]==0:
+        x.pop(0)
+    return f[:b], x
 
 def raicesenintervalo (funcion,inicio,final):
     lista=[]
@@ -23,8 +30,10 @@ def raicesenintervalo (funcion,inicio,final):
         n_1=len(lista)
         a=lista[n_1-2]
         b=lista[n_1-1]
-        h,c=numpy.polydiv(a,b)
-        lista.append(-c)
+        h,c=POLI_DIV(a, b)
+        for i in range(len(c)):
+            c[i]=c[i]*-1
+        lista.append(c)
         n=len(c)
         #hasta aqui va bien
     for i in range(len(lista)):
